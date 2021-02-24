@@ -266,10 +266,9 @@ Are there any other side benefits of using HTTP/2 or gRPC for transport?
 
 ## Plan Of Attack
 
-Incremental steps that execute this change. Generally this is in the form of:
+The following steps are generally the incremental steps to execute this change. To summarize first we need to support a v2 config with both the `Vector` source _and_ the `Vector` sink. The v2 config will be backed by a GRPC implementation over Tonic that we will clearly document as an `Internal Only` API. Once fully implemented and tested we will deprecate the `Vector` v1 config in the off-chance a user is leveraging these sources and sinks. At this point it might be good to dive into optimization of our protobufs. Once GRPC has settled in we may wish to remove support for TCP. This last step is optional in the case that we need the source and sink to leverage a different transport or protocol for integrating into other systems.
 
-- [ ] Implement HTTP/1.1 with batching and v2 config (similar to the Lua transform)
-- [ ] Implementent HTTP/2
+- [ ] Implement GRPC via Tonic and v2 config (similar to the Lua transform)
+- [ ] Deprecate TCP
 - [ ] Optimize Protobufs implementation
-- [ ] Deprecate HTTP/1.1 and TCP
-- [ ] Remove HTTP/1.1 and TCP support?
+- [ ] Remove TCP support (optional)
